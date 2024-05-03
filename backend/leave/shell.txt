@@ -1,0 +1,24 @@
+from leave.models import User, Branch
+
+user = User.objects.get(user_id=1)
+branch_ids = [1, 3, 4]
+
+for branch_id in branch_ids:
+    branch = Branch.objects.get(branch_id=branch_id)
+    user.managed_branches.add(branch)
+
+user.save()
+
+
+from leave.models import User
+
+# Get the HR user
+hr = User.objects.get(role='HR')
+
+# Get all manager users
+managers = User.objects.filter(role='MGR')
+
+# Set the HR as the manager of all managers
+for manager in managers:
+    manager.manager = hr
+    manager.save()

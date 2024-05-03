@@ -1,24 +1,7 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-class User(models.Model):
-    ROLES = (
-        ('EMP', 'Employee'),
-        ('MGR', 'Manager'),
-        ('HR', 'HR'),
-    )
 
-    user_id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
-    email = models.EmailField(max_length=255)
-    role = models.CharField(max_length=3, choices=ROLES)
-    branch = models.ForeignKey('Branch', on_delete=models.CASCADE)
-    manager = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
-
-    class Meta:
-        db_table = 'Users'
-    
-        
 class Branch(models.Model):
     branch_id = models.AutoField(primary_key=True)
     branch_name = models.CharField(max_length=255)
@@ -27,6 +10,30 @@ class Branch(models.Model):
 
     class Meta:
         db_table = 'Branches'
+        
+class User(AbstractUser):
+    ROLES = (
+        ('EMP', 'Employee'),
+        ('MGR', 'Manager'),
+        ('HR', 'HR'),
+        ('ADM', 'Admin'),
+    )
+    GENDER = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    )
+    email = models.EmailField(unique=True,null=True, blank=True)
+    role = models.CharField(max_length=3, choices=ROLES)
+    gender = models.CharField(max_length=1, choices=GENDER, default='O')
+    phone_number = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    branch = models.ForeignKey('Branch', on_delete=models.CASCADE, null=True)
+    managed_branches = models.ManyToManyField('Branch', related_name='managers', blank=True)
+    
+    class meta:
+        db_table = 'Users'
+        
+
 
 class LeaveType(models.Model):
     leave_type_id = models.AutoField(primary_key=True)
@@ -36,6 +43,7 @@ class LeaveType(models.Model):
     class Meta:
         db_table = 'LeaveTypes'
         
+
 class LeaveRequest(models.Model):
     STATUS_CHOICES = (
         ('PEN', 'Pending'),
