@@ -29,10 +29,7 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=255, unique=True, null=True, blank=True)
     branch = models.ForeignKey('Branch', on_delete=models.CASCADE, null=True)
     managed_branches = models.ManyToManyField('Branch', related_name='managers', blank=True)
-    
-    class meta:
-        db_table = 'Users'
-        
+            
 
 
 class LeaveType(models.Model):
