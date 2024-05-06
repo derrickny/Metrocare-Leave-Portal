@@ -39,7 +39,7 @@ export default function Component() {
     <div className='pt-6 px-4 sm:px-0'>
       <div className="rounded-lg overflow-hidden shadow-lg mx-auto max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl bg-blue-900 p-4">
         <Navbar fluid>
-          <NavbarBrand href="https://flowbite-react.com" className="font-sans text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+          <NavbarBrand href="#" className="font-sans text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
             <Image 
               src="/images/Metrocare.png" 
               className="mr-3 h-6 sm:h-9" 
@@ -86,14 +86,14 @@ export default function Component() {
             <NavbarToggle />
           </div>
 
-          <NavbarCollapse className="space-y-2">
-            <NavbarLink href="#" active className="font-bold uppercase text-white hover:text-white">
-              Home
-            </NavbarLink>
-            <NavbarLink href="#" className="font-bold uppercase text-white hover:text-red">Add Absence</NavbarLink>
-            <NavbarLink href="#" className="font-bold uppercase  text-white hover:text-white">Status</NavbarLink>
-            <NavbarLink href="#" className="font-bold uppercase text-white  hover:text-white">Leave Balances</NavbarLink>
-          </NavbarCollapse>
+      <NavbarCollapse className="space-y-2 md:hidden">
+  <NavbarLink href="#" active className="font-bold uppercase text-white hover:text-white">
+    Home
+  </NavbarLink>
+  <NavbarLink href="#" className="font-bold uppercase text-white hover:text-red">Add Absence</NavbarLink>
+  <NavbarLink href="#" className="font-bold uppercase  text-white hover:text-white">Status</NavbarLink>
+  <NavbarLink href="#" className="font-bold uppercase text-white  hover:text-white">Leave Balances</NavbarLink>
+</NavbarCollapse>
         </Navbar>
       </div>
     </div>
